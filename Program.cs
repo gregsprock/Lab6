@@ -28,18 +28,50 @@ namespace Lab6
                     }
                 };
 
-                Studio studios2 = new Studio
+                Studio Studio2 = new Studio
                 {
                     Name = "Universal Pictures"
                 };
+
+                db.Add(Studio);
+                db.Add(Studio2); 
+                db.SaveChanges(); 
             }
-            /*using (var db = new StudioContext())
+
+            using (var db = new StudioContext())
             {
-                Movie Movie = new Movie { Title = "Jurrasic Park", Genre = "Action"};
-                Movie.Studio = db.Studios.Where();
-                db.Add(post);
+                Movie Movie = new Movie {Title = "Jurrasic Park", Genre = "Action"};
+                Movie.Studio = db.Studios.Where(s => s.Name == "Universal Pictures").First();
+                db.Add(Movie);
                 db.SaveChanges();                   
-            } */
+            }
+
+            using (var db = new StudioContext())
+            {
+                Movie Movie = db.Movies.Where(m => m.Title == "Apollo 13").First();
+                Movie.Studio = db.Studios.Where(s => s.Name == "Universal Pictures").First();
+                db.SaveChanges();
+            }
+
+            using (var db = new StudioContext())
+            {
+                Movie Movie = db.Movies.Where(m => m.Title == "Deadpool").First();
+                db.Remove(Movie);
+                db.SaveChanges();                   
+            }
+
+            using (var db = new StudioContext())
+            {
+                var studios = db.Studios.Include(s => s.Movies);
+                foreach (var s in studios)
+                {
+                    Console.WriteLine(s);
+                    foreach (var p in s.Movies)
+                    {
+                       Console.WriteLine("\t" + p);
+                    }
+                }
+            }
         }
     }
 }
