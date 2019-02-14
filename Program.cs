@@ -24,7 +24,7 @@ namespace Lab6
                         new Movie {Title = "Avatar", Genre = "Action"},
                         new Movie {Title = "Deadpool", Genre = "Action"},
                         new Movie {Title = "Apollo 13", Genre = "Drama"},
-                        new Movie {Title = "The Martian", Genre = "Sci-Fi"},
+                        new Movie {Title = "The Martians", Genre = "Sci-Fi"},
                     }
                 };
 
